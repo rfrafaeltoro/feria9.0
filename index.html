@@ -574,7 +574,7 @@
     <script>
         // CONFIGURA AQUÍ TU URL DE GOOGLE SHEETS
         const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbyC_4ISucSROlmIlxPRTuq2SUJkHKj3Jn4Axu6X9-2LzXUXRWcqkGyEQ7daELgsKxbY/exec';
-
+// Manejo de los checkboxes para añadir clase 'checked'
         document.querySelectorAll('.checkbox-item input[type="checkbox"]').forEach(checkbox => {
             checkbox.addEventListener('change', function() {
                 const item = this.closest('.checkbox-item');
@@ -586,6 +586,7 @@
             });
         });
 
+        // Función para mostrar alertas
         function showAlert(type, message) {
             const alertEl = document.getElementById(type + 'Alert');
             if (alertEl) {
@@ -599,6 +600,7 @@
             }
         }
 
+        // Función para recolectar datos del formulario
         function getFormData() {
             const formData = new FormData(document.getElementById('inscriptionForm'));
             const data = {};
@@ -621,73 +623,85 @@
             return data;
         }
 
+        // Función para enviar datos a Google Sheets
         async function sendToGoogleSheets(data) {
-            const response = await fetch(GOOGLE_SHEETS_URL, {
-                method: 'POST',
-                mode: 'no-cors',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(data)
-            });
-            return { success: true };
+            try {
+                const response = await fetch(GOOGLE_SHEETS_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                });
+                console.log('Respuesta del servidor:', response); // Para depuración
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const result = await response.json();
+                console.log('Resultado del servidor:', result); // Para depuración
+                return result;
+            } catch (error) {
+                console.error('Error en fetch:', error); // Para depuración
+                throw new Error('Error al enviar los datos: ' + error.message);
+            }
         }
 
+        // Manejo del envío del formulario
         document.getElementById('inscriptionForm').addEventListener('submit', async function(e) {
-  e.preventDefault();
-  
-  const requiredFields = this.querySelectorAll('[required]');
-  let isValid = true;
-  
-  requiredFields.forEach(field => {
-    if (!field.value && !field.checked) {
-      isValid = false;
-      field.style.borderColor = '#ff6b6b';
-    } else {
-      field.style.borderColor = '#e1e5e9';
-    }
-  });
+            e.preventDefault();
+            
+            const requiredFields = this.querySelectorAll('[required]');
+            let isValid = true;
+            
+            requiredFields.forEach(field => {
+                if (!field.value && !field.checked) {
+                    isValid = false;
+                    field.style.borderColor = '#ff6b6b';
+                } else {
+                    field.style.borderColor = '#e1e5e9';
+                }
+            });
 
-  const recursosCheckboxes = document.querySelectorAll('input[name="recursos"]:checked');
-  if (recursosCheckboxes.length === 0) {
-    isValid = false;
-    showAlert('error', 'Selecciona al menos un recurso.');
-    return;
-  }
+            const recursosCheckboxes = document.querySelectorAll('input[name="recursos"]:checked');
+            if (recursosCheckboxes.length === 0) {
+                isValid = false;
+                showAlert('error', 'Selecciona al menos un recurso.');
+                return;
+            }
 
-  if (!isValid) {
-    showAlert('error');
-    return;
-  }
+            if (!isValid) {
+                showAlert('error');
+                return;
+            }
 
-  const submitBtn = document.getElementById('submitBtn');
-  submitBtn.disabled = true;
-  submitBtn.innerHTML = '📤 Enviando...';
+            const submitBtn = document.getElementById('submitBtn');
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '📤 Enviando...';
 
-  try {
-    const data = getFormData();
-    console.log('Datos a enviar:', data);
-    
-    const result = await sendToGoogleSheets(data);
-    if (result.success) {
-      showAlert('success');
-      setTimeout(() => {
-        this.reset();
-        document.querySelectorAll('.checkbox-item').forEach(item => {
-          item.classList.remove('checked');
+            try {
+                const data = getFormData();
+                console.log('Datos a enviar:', data); // Para depuración
+                
+                const result = await sendToGoogleSheets(data);
+                if (result.success) {
+                    showAlert('success');
+                    setTimeout(() => {
+                        this.reset();
+                        document.querySelectorAll('.checkbox-item').forEach(item => {
+                            item.classList.remove('checked');
+                        });
+                    }, 2000);
+                } else {
+                    showAlert('error', 'Error al enviar los datos: ' + (result.error || 'Intenta de nuevo.'));
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                showAlert('error', 'Error al enviar. Intenta de nuevo.');
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '🚀 Enviar Inscripción';
+            }
         });
-      }, 2000);
-    } else {
-      showAlert('error', 'Error al enviar los datos. Intenta de nuevo.');
-    }
-  } catch (error) {
-    console.error('Error:', error);
-    showAlert('error', 'Error al enviar. Intenta de nuevo.');
-  } finally {
-    submitBtn.disabled = false;
-    submitBtn.innerHTML = '🚀 Enviar Inscripción';
-  }
-});
     </script>
 </body>
 </html>
