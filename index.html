@@ -312,4 +312,382 @@
 
                     <div class="form-row two-columns">
                         <div class="form-group">
-                            <label for="tipoDocumento">Tipo de
+                            <label for="tipoDocumento">Tipo de Documento <span class="required">*</span></label>
+                            <select id="tipoDocumento" name="tipoDocumento" required>
+                                <option value="">Seleccionar...</option>
+                                <option value="CC">Cédula de Ciudadanía</option>
+                                <option value="TI">Tarjeta de Identidad</option>
+                                <option value="CE">Cédula de Extranjería</option>
+                                <option value="PP">Pasaporte</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="numeroDocumento">Número de Documento <span class="required">*</span></label>
+                            <input type="text" id="numeroDocumento" name="numeroDocumento" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row two-columns">
+                        <div class="form-group">
+                            <label for="telefono">Teléfono/Celular <span class="required">*</span></label>
+                            <input type="tel" id="telefono" name="telefono" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Correo Electrónico <span class="required">*</span></label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h2 class="section-title">
+                        <div class="section-icon">🎓</div>
+                        Información Académica
+                    </h2>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="tipoParticipante">Tipo de Participante <span class="required">*</span></label>
+                            <select id="tipoParticipante" name="tipoParticipante" required>
+                                <option value="">Seleccionar...</option>
+                                <option value="estudiante-activo">Estudiante Activo</option>
+                                <option value="egresado">Egresado UNIMINUTO</option>
+                                <option value="microempresario">Microempresario Local</option>
+                                <option value="docente">Docente UNIMINUTO</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row two-columns">
+                        <div class="form-group">
+                            <label for="programa">Programa Académico <span class="required">*</span></label>
+                            <select id="programa" name="programa" required>
+                                <option value="">Seleccionar programa...</option>
+                                <option value="administracion-empresas">Administración de Empresas</option>
+                                <option value="contaduria-publica">Contaduría Pública</option>
+                                <option value="psicologia">Psicología</option>
+                                <option value="trabajo-social">Trabajo Social</option>
+                                <option value="otro">Otro</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="semestre">Semestre Actual / Año de Egreso</label>
+                            <input type="text" id="semestre" name="semestre" placeholder="Ej: 8° semestre o 2023">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h2 class="section-title">
+                        <div class="section-icon">💡</div>
+                        Información del Emprendimiento/Negocio
+                    </h2>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="nombreNegocio">Nombre del Emprendimiento/Negocio <span class="required">*</span></label>
+                            <input type="text" id="nombreNegocio" name="nombreNegocio" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="descripcionNegocio">Descripción del Negocio <span class="required">*</span></label>
+                            <textarea id="descripcionNegocio" name="descripcionNegocio" placeholder="Describe brevemente tu emprendimiento..." required></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-row two-columns">
+                        <div class="form-group">
+                            <label for="categoriaEmprendimiento">Categoría del Emprendimiento <span class="required">*</span></label>
+                            <select id="categoriaEmprendimiento" name="categoriaEmprendimiento" required>
+                                <option value="">Seleccionar categoría...</option>
+                                <option value="tecnologico">Tecnológico</option>
+                                <option value="social">Social</option>
+                                <option value="ambiental">Ambiental</option>
+                                <option value="cultural">Cultural</option>
+                                <option value="comercial">Comercial</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="nivelMadurez">Nivel de Madurez <span class="required">*</span></label>
+                            <select id="nivelMadurez" name="nivelMadurez" required>
+                                <option value="">Seleccionar nivel...</option>
+                                <option value="idea-inicial">Idea en fase inicial</option>
+                                <option value="validacion">Proyecto en validación</option>
+                                <option value="modelo-consolidado">Modelo consolidado</option>
+                                <option value="microempresa">Microempresa establecida</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h2 class="section-title">
+                        <div class="section-icon">👥</div>
+                        Registro de Visitantes al Stand
+                    </h2>
+                    <p style="margin-bottom: 20px; color: #666; font-size: 0.95em;">
+                        <strong>Instrucciones:</strong> Registra 2 personas que visitarán tu stand el día de la feria (pueden ser colaboradores, invitados especiales, o personas de apoyo).
+                    </p>
+
+                    <!-- Visitante 1 -->
+                    <div style="background: white; padding: 20px; border-radius: 10px; margin-bottom: 20px; border: 2px solid #667eea;">
+                        <h3 style="color: #667eea; margin-bottom: 15px; font-size: 1.1em;">👤 Visitante 1 <span class="required">*</span></h3>
+                        
+                        <div class="form-row two-columns">
+                            <div class="form-group">
+                                <label for="visitante1Nombre">Nombres Completos <span class="required">*</span></label>
+                                <input type="text" id="visitante1Nombre" name="visitante1Nombre" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="visitante1Apellidos">Apellidos Completos <span class="required">*</span></label>
+                                <input type="text" id="visitante1Apellidos" name="visitante1Apellidos" required>
+                            </div>
+                        </div>
+
+                        <div class="form-row two-columns">
+                            <div class="form-group">
+                                <label for="visitante1Documento">Número de Documento <span class="required">*</span></label>
+                                <input type="text" id="visitante1Documento" name="visitante1Documento" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="visitante1Telefono">Teléfono/Celular <span class="required">*</span></label>
+                                <input type="tel" id="visitante1Telefono" name="visitante1Telefono" required>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="visitante1Rol">Rol en el Stand <span class="required">*</span></label>
+                                <select id="visitante1Rol" name="visitante1Rol" required>
+                                    <option value="">Seleccionar...</option>
+                                    <option value="colaborador">Colaborador/Socio</option>
+                                    <option value="apoyo">Personal de Apoyo</option>
+                                    <option value="invitado">Invitado Especial</option>
+                                    <option value="asesor">Asesor/Mentor</option>
+                                    <option value="otro">Otro</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Visitante 2 -->
+                    <div style="background: white; padding: 20px; border-radius: 10px; margin-bottom: 20px; border: 2px solid #764ba2;">
+                        <h3 style="color: #764ba2; margin-bottom: 15px; font-size: 1.1em;">👤 Visitante 2 <span class="required">*</span></h3>
+                        
+                        <div class="form-row two-columns">
+                            <div class="form-group">
+                                <label for="visitante2Nombre">Nombres Completos <span class="required">*</span></label>
+                                <input type="text" id="visitante2Nombre" name="visitante2Nombre" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="visitante2Apellidos">Apellidos Completos <span class="required">*</span></label>
+                                <input type="text" id="visitante2Apellidos" name="visitante2Apellidos" required>
+                            </div>
+                        </div>
+
+                        <div class="form-row two-columns">
+                            <div class="form-group">
+                                <label for="visitante2Documento">Número de Documento <span class="required">*</span></label>
+                                <input type="text" id="visitante2Documento" name="visitante2Documento" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="visitante2Telefono">Teléfono/Celular <span class="required">*</span></label>
+                                <input type="tel" id="visitante2Telefono" name="visitante2Telefono" required>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="visitante2Rol">Rol en el Stand <span class="required">*</span></label>
+                                <select id="visitante2Rol" name="visitante2Rol" required>
+                                    <option value="">Seleccionar...</option>
+                                    <option value="colaborador">Colaborador/Socio</option>
+                                    <option value="apoyo">Personal de Apoyo</option>
+                                    <option value="invitado">Invitado Especial</option>
+                                    <option value="asesor">Asesor/Mentor</option>
+                                    <option value="otro">Otro</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h2 class="section-title">
+                        <div class="section-icon">📋</div>
+                        Recursos y Participación en la Feria
+                    </h2>
+
+                    <div class="form-group">
+                        <label>Recursos que necesitas para tu stand: <span class="required">*</span></label>
+                        <div class="checkbox-group">
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="recursos" value="mesa">
+                                <span>Mesa</span>
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="recursos" value="sillas">
+                                <span>Sillas (2)</span>
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="recursos" value="energia">
+                                <span>Toma eléctrica</span>
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="recursos" value="internet">
+                                <span>Internet WiFi</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="observaciones">Observaciones adicionales</label>
+                            <textarea id="observaciones" name="observaciones" placeholder="Cualquier información adicional..."></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <div class="form-group">
+                        <label class="checkbox-item">
+                            <input type="checkbox" id="terminos" name="terminos" required>
+                            <span>Acepto los términos y condiciones <span class="required">*</span></span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="submit-section">
+                    <button type="submit" class="submit-btn" id="submitBtn">
+                        🚀 Enviar Inscripción
+                    </button>
+                    <p style="margin-top: 15px; color: #666; font-size: 0.9em;">
+                        Te contactaremos en máximo 5 días hábiles
+                    </p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // CONFIGURA AQUÍ TU URL DE GOOGLE SHEETS
+        const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/TU_ID_AQUI/exec';
+
+        document.querySelectorAll('.checkbox-item input[type="checkbox"]').forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                const item = this.closest('.checkbox-item');
+                if (this.checked) {
+                    item.classList.add('checked');
+                } else {
+                    item.classList.remove('checked');
+                }
+            });
+        });
+
+        function showAlert(type, message) {
+            const alertEl = document.getElementById(type + 'Alert');
+            if (alertEl) {
+                if (message) {
+                    alertEl.textContent = message;
+                }
+                alertEl.classList.add('show');
+                setTimeout(() => {
+                    alertEl.classList.remove('show');
+                }, 5000);
+            }
+        }
+
+        function getFormData() {
+            const formData = new FormData(document.getElementById('inscriptionForm'));
+            const data = {};
+            
+            for (let [key, value] of formData.entries()) {
+                if (key === 'recursos') {
+                    if (!data.recursos) data.recursos = [];
+                    data.recursos.push(value);
+                } else {
+                    data[key] = value;
+                }
+            }
+            
+            if (data.recursos) {
+                data.recursos = data.recursos.join(', ');
+            }
+            
+            data.fechaInscripcion = new Date().toLocaleString('es-CO');
+            
+            return data;
+        }
+
+        async function sendToGoogleSheets(data) {
+            const response = await fetch(GOOGLE_SHEETS_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data)
+            });
+            return { success: true };
+        }
+
+        document.getElementById('inscriptionForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  
+  const requiredFields = this.querySelectorAll('[required]');
+  let isValid = true;
+  
+  requiredFields.forEach(field => {
+    if (!field.value && !field.checked) {
+      isValid = false;
+      field.style.borderColor = '#ff6b6b';
+    } else {
+      field.style.borderColor = '#e1e5e9';
+    }
+  });
+
+  const recursosCheckboxes = document.querySelectorAll('input[name="recursos"]:checked');
+  if (recursosCheckboxes.length === 0) {
+    isValid = false;
+    showAlert('error', 'Selecciona al menos un recurso.');
+    return;
+  }
+
+  if (!isValid) {
+    showAlert('error');
+    return;
+  }
+
+  const submitBtn = document.getElementById('submitBtn');
+  submitBtn.disabled = true;
+  submitBtn.innerHTML = '📤 Enviando...';
+
+  try {
+    const data = getFormData();
+    console.log('Datos a enviar:', data);
+    
+    const result = await sendToGoogleSheets(data);
+    if (result.success) {
+      showAlert('success');
+      setTimeout(() => {
+        this.reset();
+        document.querySelectorAll('.checkbox-item').forEach(item => {
+          item.classList.remove('checked');
+        });
+      }, 2000);
+    } else {
+      showAlert('error', 'Error al enviar los datos. Intenta de nuevo.');
+    }
+  } catch (error) {
+    console.error('Error:', error);
+    showAlert('error', 'Error al enviar. Intenta de nuevo.');
+  } finally {
+    submitBtn.disabled = false;
+    submitBtn.innerHTML = '🚀 Enviar Inscripción';
+  }
+});
+    </script>
+</body>
+</html>
