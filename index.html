@@ -647,61 +647,50 @@
         }
 
         // Manejo del envío del formulario
-        document.getElementById('inscriptionForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            
-            const requiredFields = this.querySelectorAll('[required]');
-            let isValid = true;
-            
-            requiredFields.forEach(field => {
-                if (!field.value && !field.checked) {
-                    isValid = false;
-                    field.style.borderColor = '#ff6b6b';
-                } else {
-                    field.style.borderColor = '#e1e5e9';
-                }
-            });
+        // Manejo del envío del formulario
+document.getElementById('inscriptionForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
 
-            const recursosCheckboxes = document.querySelectorAll('input[name="recursos"]:checked');
-            if (recursosCheckboxes.length === 0) {
-                isValid = false;
-                showAlert('error', 'Selecciona al menos un recurso.');
-                return;
-            }
+    const requiredFields = this.querySelectorAll('[required]');
+    let isValid = true;
 
-            if (!isValid) {
-                showAlert('error');
-                return;
-            }
+    requiredFields.forEach(field => {
+        if (!field.value && !field.checked) {
+            isValid = false;
+            field.style.borderColor = '#ff6b6b';
+        } else {
+            field.style.borderColor = '#e1e5e9';
+        }
+    });
 
-            const submitBtn = document.getElementById('submitBtn');
-            submitBtn.disabled = true;
-            submitBtn.innerHTML = '📤 Enviando...';
+    if (!isValid) {
+        showAlert('error', 'Por favor, completa todos los campos obligatorios marcados con *.');
+        return;
+    }
 
-            try {
-                const data = getFormData();
-                console.log('Datos a enviar:', data); // Para depuración
-                
-                const result = await sendToGoogleSheets(data);
-                if (result.success) {
-                    showAlert('success');
-                    setTimeout(() => {
-                        this.reset();
-                        document.querySelectorAll('.checkbox-item').forEach(item => {
-                            item.classList.remove('checked');
-                        });
-                    }, 2000);
-                } else {
-                    showAlert('error', 'Error al enviar los datos: ' + (result.error || 'Intenta de nuevo.'));
-                }
-            } catch (error) {
-                console.error('Error:', error);
-                showAlert('error', 'Error al enviar. Intenta de nuevo.');
-            } finally {
-                submitBtn.disabled = false;
-                submitBtn.innerHTML = '🚀 Enviar Inscripción';
-            }
-        });
+    const submitBtn = document.getElementById('submitBtn');
+    submitBtn.disabled = true;
+    submitBtn.textContent = '⏳ Enviando...';
+
+    try {
+        const data = getFormData();
+        const result = await sendToGoogleSheets(data);
+
+        if (result.success) {
+            showAlert('success', '¡Inscripción enviada exitosamente! Te contactaremos pronto con más información.');
+            this.reset();
+            document.querySelectorAll('.checkbox-item').forEach(item => item.classList.remove('checked'));
+        } else {
+            throw new Error(result.message || 'No se pudo registrar la inscripción.');
+        }
+    } catch (error) {
+        console.error(error);
+        showAlert('error', 'Error al enviar los datos. Intenta nuevamente en unos minutos.');
+    } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = '🚀 Enviar Inscripción';
+    }
+});
     </script>
 </body>
 </html>
