@@ -626,22 +626,22 @@
         // Función para enviar datos a Google Sheets
         async function sendToGoogleSheets(data) {
             try {
-                const response = await fetch(GOOGLE_SHEETS_URL, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(data)
+                // Enviar como FormData para evitar preflight; usar no-cors y no leer respuesta
+                const formData = new FormData();
+                Object.entries(data).forEach(([key, value]) => {
+                    formData.append(key, value);
                 });
-                console.log('Respuesta del servidor:', response); // Para depuración
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                const result = await response.json();
-                console.log('Resultado del servidor:', result); // Para depuración
-                return result;
+
+                await fetch(GOOGLE_SHEETS_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    body: formData
+                });
+
+                // En modo no-cors la respuesta es opaca; asumimos éxito si no hubo excepción
+                return { success: true };
             } catch (error) {
-                console.error('Error en fetch:', error); // Para depuración
+                console.error('Error en fetch:', error);
                 throw new Error('Error al enviar los datos: ' + error.message);
             }
         }
